@@ -4,6 +4,8 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+
+
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId)
@@ -101,7 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const { email, password, username } = req.body
 
-    if (!username || !email) {
+    if (!(username || email)) {
         throw new ApiError(400, "username and email is required")
     }
 
@@ -113,7 +115,7 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new ApiError(404, "User dosn't exists")
     }
 
-    const isPasswordValid = await user.ispasswordCorrect(password)
+    const isPasswordValid = await user.isPasswordCorrect(password)
 
     if (!isPasswordValid) {
         throw new ApiError(401, "Invalid user credentials")
@@ -121,6 +123,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
 
+    
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
 
@@ -149,7 +152,7 @@ const logoutUser = asyncHandler(async (req, res) => {
             }
         },
         {
-            new:true
+            new: true
         }
     )
 
@@ -158,7 +161,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         secure: true
     }
 
-    return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options).json(new ApiResponse(200,{},"User logged Out"))
+    return res.status(200).clearCookie("accessToken", options).clearCookie("refreshToken", options).json(new ApiResponse(200, {}, "User logged Out"))
 })
 
 
