@@ -101,5 +101,5 @@ Feel free to submit pull requests and contribute to the project! Please adhere t
 ## Contact
 
 For any queries or feedback, please contact:
-- **Your Name**: [your-email@example.com](mailto:your-email@example.com)
-- GitHub: [https://github.com/your-username](https://github.com/your-username)
+- **Satyam Patel**: [satyamyt876@gmail.com](mailto:satyamyt876@gmail.com)
+- GitHub: [https://github.com/satyam-006](https://github.com/satyam-006)
